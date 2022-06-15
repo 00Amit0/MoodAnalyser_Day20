@@ -159,5 +159,28 @@ namespace UnitTest1
                 Assert.AreEqual(expected, e.Message);
             }
         }
+
+        [TestMethod]
+        [TestCategory("constructor with invalid parameterised")]
+        public void GivenHappyMessage_UsingReflection_IfCorrect_Should_ReturnHappy()
+        {
+            string message = MoodAnalyserFactory.InvokeMethod("MoodAnalyzer.InvokeMethod", "GetMood", "HAPPY");
+            Assert.AreEqual("HAPPY", message);
+        }
+        /// Given Happy message when incorrect method 
+        /// should throw MoodAnalyserException
+        [TestMethod]
+        [TestCategory("constructor with invalid parameterised")]
+        public void GivenHappyMessage_UsingReflection_WhenIncorrectMethod_shouldThrow_MoodAnayserException()
+        {
+            try
+            {
+                string message = MoodAnalyserFactory.InvokeMethod("MoodAnalyzer.InvokeMethod", "getMethod", "HAPPY");
+            }
+            catch (CustomMoodAnalyserException e)
+            {
+                Assert.AreEqual(CustomMoodAnalyserException.ExceptionType.INVALID_INPUT, e.Message);
+            }
+        }
     }
 }
