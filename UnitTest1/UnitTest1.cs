@@ -50,5 +50,28 @@ namespace UnitTest1
             //comparing expected and actual 
             Assert.AreEqual(expected, actual);
         }
+        [TestMethod]
+        [TestCategory("Empty Exception")]
+        public void TestMethod4()
+        {
+            ///Arrange , Act and in last Assert
+            //giving expected result to variable 
+            string excepted = "Message can't be Empty";
+            try
+            {
+                //giving string value to message 
+                string message = " ";
+                //creating object
+                MoodAnalyzer mood = new MoodAnalyzer(message);
+                //returned value assigning to actual
+                string actual = mood.AnalyseMood();
+            }
+            catch (CustomMoodAnalyserException ex)
+            {
+                Console.WriteLine("Mood anaylser Exception :" + ex);
+                //comparing 
+                Assert.AreEqual(excepted, ex.Message);
+            }
+        }
     }
 }
